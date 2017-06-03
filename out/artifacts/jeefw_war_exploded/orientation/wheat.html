@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>页面设计</title>
+    <meta charset="utf-8">
+    <title>Bootstrap 实例 - 标签页（Tab）插件事件</title>
+    <link rel="stylesheet" href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!--Step:2 Import echarts.js-->
+    <!--Step:2 引入echarts.js-->
+    <script src="../echart/echartjs/echarts.js"></script>
+
+    <script type="text/javascript">
+        // Step:3 conifg ECharts's path, link to echarts.js from current page.
+        // Step:3 为模块加载器配置echarts的路径，从当前页面链接到echarts.js，定义所需图表路径
+        require.config({
+            paths: {
+                echarts: '../echart/echartjs'
+            }
+        });
+
+        // Step:4 require echarts and use it in the callback.
+        // Step:4 动态加载echarts然后在回调函数中开始使用，注意保持按需加载结构定义图表路径
+        require(
+            [
+                '/echart/echartjs/echarts',
+                '/echart/echartjs/chart/bar',
+                '/echart/echartjs/chart/line',
+                '/echart/echartjs/chart/map'
+            ],
+            function (ec) {
+                //--- 折柱 ---
+                var myChart = ec.init(document.getElementById('main'));
+                myChart.setOption({
+                    tooltip : {
+                        trigger: 'axis'
+                    },
+                    legend: {
+                        data:['蒸发量','降水量']
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
+                    calculable : true,
+                    xAxis : [
+                        {
+                            type : 'category',
+                            data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                        }
+                    ],
+                    yAxis : [
+                        {
+                            type : 'value',
+                            splitArea : {show : true}
+                        }
+                    ],
+                    series : [
+                        {
+                            name:'蒸发量',
+                            type:'bar',
+                            data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                        },
+                        {
+                            name:'降水量',
+                            type:'bar',
+                            data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                        }
+                    ]
+                });
+
+                // --- 地图 ---
+                var myChart2 = ec.init(document.getElementById('mainMap'));
+                myChart2.setOption({
+                    tooltip : {
+                        trigger: 'item',
+                        formatter: '{b}'
+                    },
+                    series : [
+                        {
+                            name: '中国',
+                            type: 'map',
+                            mapType: 'china',
+                            selectedMode : 'multiple',
+                            itemStyle:{
+                                normal:{label:{show:true}},
+                                emphasis:{label:{show:true}}
+                            },
+                            data:[
+                                {name:'广东',selected:true}
+                            ]
+                        }
+                    ]
+                });
+            }
+        );
+    </script>
+</head>
+
+<body>
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <button type="button" class="btn btn-default active">按钮</button>
+            <div class="btn-group">
+                <button class="btn btn-default">Action</button> <button data-toggle="dropdown" class="btn btn-default dropdown-toggle"><span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="#">操作</a>
+                    </li>
+                    <li class="disabled">
+                        <a href="#">另一操作</a>
+                    </li>
+                    <li class="divider">
+                    </li>
+                    <li>
+                        <a href="#">其它</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="row clearfix">
+                <div class="col-md-6 column">
+
+
+                    <div class="tabbable" id="tabs-333354">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#panel-51760" data-toggle="tab">Section 1</a>
+                            </li>
+                            <li>
+                                <a href="#panel-845046" data-toggle="tab">Section 2</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="panel-51760">
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th>
+                                            编号
+                                        </th>
+                                        <th>
+                                            产品
+                                        </th>
+                                        <th>
+                                            交付时间
+                                        </th>
+                                        <th>
+                                            状态
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            01/04/2012
+                                        </td>
+                                        <td>
+                                            Default
+                                        </td>
+                                    </tr>
+                                    <tr class="success">
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            01/04/2012
+                                        </td>
+                                        <td>
+                                            Approved
+                                        </td>
+                                    </tr>
+                                    <tr class="error">
+                                        <td>
+                                            2
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            02/04/2012
+                                        </td>
+                                        <td>
+                                            Declined
+                                        </td>
+                                    </tr>
+                                    <tr class="warning">
+                                        <td>
+                                            3
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            03/04/2012
+                                        </td>
+                                        <td>
+                                            Pending
+                                        </td>
+                                    </tr>
+                                    <tr class="info">
+                                        <td>
+                                            4
+                                        </td>
+                                        <td>
+                                            TB - Monthly
+                                        </td>
+                                        <td>
+                                            04/04/2012
+                                        </td>
+                                        <td>
+                                            Call in to confirm
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <ul class="pagination">
+                                    <li>
+                                        <a href="#">Prev</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">1</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">2</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">3</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">4</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">5</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">Next</a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="tab-pane" id="panel-845046">
+                                <div id="main" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+                                <div id="mainMap" style="height:500px;border:1px solid #ccc;padding:10px;"></div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <div class="col-md-6 column">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</body>
+
+</html>
